@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
-const Surface_FTR_139_Schema = new mongoose.Schema({
+const Surface_LH_140_Schema = new mongoose.Schema(
+    {
         Digit_13: String,
         Surface_RH_139 : String,
         AA : String,
@@ -17,6 +18,8 @@ const Surface_FTR_139_Schema = new mongoose.Schema({
         Check_point:String,
         Barcode:String,
         Segement: String
-})
 
-module.exports = mongoose.model('Surface_FTR_139', Surface_FTR_139_Schema);
+    }
+)
+
+module.exports = mongoose.model('Surface_LH_140', Surface_LH_140_Schema);

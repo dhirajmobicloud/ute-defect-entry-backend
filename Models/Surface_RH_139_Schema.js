@@ -16,7 +16,8 @@ const Surface_RH_139_Schema = new mongoose.Schema(
         LOC:String,
         Station_No:String,
         Check_point:String,
-        Barcode:String
+        Barcode:String,
+        Segement: String
 
     }
 )

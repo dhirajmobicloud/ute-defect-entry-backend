@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const Surface_FTR_139 = require('../../Models/Surface_FTR_139_Schema')
+const Bluetooth_139 = require('../../Models/Bluetooth_139_Schema')
 
 router.get('/',  (req, res) => {
-    Surface_FTR_139.find()
+   
+    Bluetooth_139.find()
     .then((response)=>{
       res.send(response)
     }).catch((error)=>{

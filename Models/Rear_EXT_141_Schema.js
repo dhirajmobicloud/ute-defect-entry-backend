@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const Surface_FTR_139_Schema = new mongoose.Schema({
+const Rear_EXT_141_Schema = new mongoose.Schema({
         Digit_13: String,
         Surface_RH_139 : String,
         AA : String,
@@ -19,4 +19,4 @@ const Surface_FTR_139_Schema = new mongoose.Schema({
         Segement: String
 })
 
-module.exports = mongoose.model('Surface_FTR_139', Surface_FTR_139_Schema);
+module.exports = mongoose.model('Rear_EXT_141', Rear_EXT_141_Schema);

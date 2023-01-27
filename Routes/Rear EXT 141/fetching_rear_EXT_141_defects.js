@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const Surface_FTR_139 = require('../../Models/Surface_FTR_139_Schema')
+const Rear_EXT_141 = require('../../Models/Rear_EXT_141_Schema')
 
 router.get('/',  (req, res) => {
-    Surface_FTR_139.find()
+ 
+    Rear_EXT_141.find()
     .then((response)=>{
       res.send(response)
     }).catch((error)=>{
