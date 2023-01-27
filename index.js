@@ -15,7 +15,7 @@ const electrical_1_140_defects = require('./Routes/Electrical 1 140/fetching_Ele
 const addNew_Electrical_1_140_defect = require('./Routes/Electrical 1 140/AddNew_Electrical_1_140_defect')
 
 const surface_LH_140_defect = require('./Routes/Surface LH 140/fetching_surface_lh_140_defect')
-const addNew_surface_LH_140_defect = require('./Routes/Surface LH 140/AddNew_surface_LH_140_defect')
+const addNew_surface_LH_140_defect = require('./Routes/Surface LH 140/AddNew_surface_lh_140_defect')
 
 const rear_INT_140_defects = require('./Routes/Rear Int 140/fetching_rear_INT_140_defects')
 const addNew_rear_INT_140_defect = require('./Routes/Rear Int 140/AddNew_rear_INT_140_defect')
