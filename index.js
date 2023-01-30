@@ -41,6 +41,7 @@ const door_closing_142_defects = require('./Routes/Door Closing 142/fetching_Doo
 const addNew_Door_closing_142_defect = require('./Routes/Door Closing 142/AddNew_Door_closing_142_defect')
 
 const add_vehicle = require('./Routes/Vehicle/add_vehicle')
+const all_vehicles = require('./Routes/Vehicle/all_vehicles')
 
 const app = express();
 app.use(express.json())
@@ -85,19 +86,8 @@ app.use('/door_closing_142_defects', door_closing_142_defects);
 app.use('/addNew_Door_closing_142_defect', addNew_Door_closing_142_defect);
 
 app.use('/add_vehicle', add_vehicle);
+app.use('/all_vehicles', all_vehicles);
 
-app.put('/update/:_id', async (req, res) => {
-  let data = await Vehicle.updateOne(
-    req.params,
-    {
-      $set: { $set: {win_number: "666666" } }
-
-
-    }
-  )
-  res.send(data);
-
-})
 mongoose.set("strictQuery", true);
 // Connect()
 
