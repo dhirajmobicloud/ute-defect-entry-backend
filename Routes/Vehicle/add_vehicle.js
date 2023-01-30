@@ -3,10 +3,10 @@ const router = express.Router();
 
 const Vehicle = require('../../Models/Vehicle_Schema')
 
-// router.get('/', async(req, res)=>{
-//     let data = await Vehicle.find();
-//     res.send(data)
-// })
+router.get('/', async(req, res)=>{
+    let data = await Vehicle.find();
+    res.send(data)
+})
 
 // router.post('/', async(req, res)=>{
 //     let data = await new Vehicle(req.body);

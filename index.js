@@ -86,6 +86,18 @@ app.use('/addNew_Door_closing_142_defect', addNew_Door_closing_142_defect);
 
 app.use('/add_vehicle', add_vehicle);
 
+app.put('/update/:_id', async (req, res) => {
+  let data = await Vehicle.updateOne(
+    req.params,
+    {
+      $set: { $set: {win_number: "666666" } }
+
+
+    }
+  )
+  res.send(data);
+
+})
 mongoose.set("strictQuery", true);
 // Connect()
 
