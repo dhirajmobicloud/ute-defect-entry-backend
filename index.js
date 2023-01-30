@@ -2,6 +2,8 @@ const express = require('express');
 const Connect = require('./DB/config');
 const mongoose = require('mongoose')
 const cors = require('cors')
+const Vehicle = require('./Models/Vehicle_Schema')
+
 const surface_RH_139_defects = require('./Routes/Surface_RH_139/fetching_surface_rh_139_defects')
 const add_surface_RH_139_defect = require('./Routes/Surface_RH_139/AddNew_surface_rh_139_defect')
 
@@ -37,6 +39,8 @@ const addNew_Front_EXT_142_defect = require('./Routes/Front EXT 142/AddNew_Front
 
 const door_closing_142_defects = require('./Routes/Door Closing 142/fetching_Door_closing_142_defects')
 const addNew_Door_closing_142_defect = require('./Routes/Door Closing 142/AddNew_Door_closing_142_defect')
+
+const add_vehicle = require('./Routes/Vehicle/add_vehicle')
 
 const app = express();
 app.use(express.json())
@@ -79,6 +83,8 @@ app.use('/addNew_Front_EXT_142_defect', addNew_Front_EXT_142_defect);
 
 app.use('/door_closing_142_defects', door_closing_142_defects);
 app.use('/addNew_Door_closing_142_defect', addNew_Door_closing_142_defect);
+
+app.use('/add_vehicle', add_vehicle);
 
 mongoose.set("strictQuery", true);
 // Connect()
