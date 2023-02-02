@@ -88,6 +88,10 @@ app.use('/addNew_Door_closing_142_defect', addNew_Door_closing_142_defect);
 app.use('/add_vehicle', add_vehicle);
 app.use('/all_vehicles', all_vehicles);
 
+app.put('/update/:id',(req, res)=>{
+    
+})
+
 mongoose.set("strictQuery", true);
 // Connect()
 
