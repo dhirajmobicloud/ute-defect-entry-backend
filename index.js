@@ -50,6 +50,10 @@ app.use(cors())
 
 // --------------------------------APIs-----------------------------------
 
+app.get('/', (req , res)=>{
+  res.send("Welcome")
+})
+
 app.use('/surface_RH_139_defects', surface_RH_139_defects);
 app.use('/add_surface_RH_139_defect', add_surface_RH_139_defect);
 
@@ -88,6 +92,18 @@ app.use('/addNew_Door_closing_142_defect', addNew_Door_closing_142_defect);
 
 app.use('/add_vehicle', add_vehicle);
 app.use('/all_vehicles', all_vehicles);
+
+app.get('/users', async (req , res)=>{
+  let data = await User.find();
+  res.send(data)
+})
+
+app.post('/login', async (req , res)=>{
+  let username = req.body.username;
+  let password = req.body.password;
+  let data = await User.find({username:username, password:password})
+ data ? res.send(data) : res.send("please enter valid data")
+})
 
 mongoose.set("strictQuery", true);
 // Connect()
