@@ -89,20 +89,6 @@ app.use('/addNew_Door_closing_142_defect', addNew_Door_closing_142_defect);
 app.use('/add_vehicle', add_vehicle);
 app.use('/all_vehicles', all_vehicles);
 
-app.get('/users', async(req, res)=>{
-  let data = await User.find();
-  res.send(data)
-})
-
-app.get('/login', async(req, res)=>{
-  let password = req.body.password
-  let username = req.body.username
-  let data = await User.find({username:username, password:password});
-  res.send(data)
-})
-
-
-
 mongoose.set("strictQuery", true);
 // Connect()
 
