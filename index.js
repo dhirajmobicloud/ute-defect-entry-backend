@@ -42,7 +42,8 @@ const door_closing_142_defects = require('./Routes/Door Closing 142/fetching_Doo
 const addNew_Door_closing_142_defect = require('./Routes/Door Closing 142/AddNew_Door_closing_142_defect')
 
 const add_vehicle = require('./Routes/Vehicle/add_vehicle')
-const all_vehicles = require('./Routes/Vehicle/all_vehicles')
+const all_vehicles = require('./Routes/Vehicle/all_vehicles');
+const { json } = require('express');
 
 const app = express();
 app.use(express.json())
@@ -95,14 +96,26 @@ app.use('/all_vehicles', all_vehicles);
 
 app.get('/users', async (req , res)=>{
   let data = await User.find();
+ 
+  // let data1 = await JSON.parse(data)
   res.send(data)
+  // data.map((element)=>{
+    // console.log()
+  //   res.send(element.username)
+  // })
+  // console.log(data[0])
+  // console.log(data1.username)
 })
 
 app.post('/login', async (req , res)=>{
-  let username = req.body.username;
-  let password = req.body.password;
-  let data = await User.find({username:username, password:password})
- data ? res.send(data) : res.send("please enter valid data")
+  let Username = req.body.username;
+  let Password = req.body.password;
+  let data = await User.findOne({username:Username, password:Password})
+ if(data){
+  res.send(data)
+ }else{
+  res.status(401).send("please enter valid data")
+ }
 })
 
 mongoose.set("strictQuery", true);
