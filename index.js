@@ -96,15 +96,8 @@ app.use('/all_vehicles', all_vehicles);
 
 app.get('/users', async (req , res)=>{
   let data = await User.find();
+  res.send({"username" : data.username})
  
-  // let data1 = await JSON.parse(data)
-  res.send(data)
-  // data.map((element)=>{
-    // console.log()
-  //   res.send(element.username)
-  // })
-  // console.log(data[0])
-  // console.log(data1.username)
 })
 
 app.post('/login', async (req , res)=>{
@@ -112,7 +105,7 @@ app.post('/login', async (req , res)=>{
   let Password = req.body.password;
   let data = await User.findOne({username:Username, password:Password})
  if(data){
-  res.send(data)
+  res.send({ "id":data._id, "username":data.username})
  }else{
   res.status(401).send("please enter valid data")
  }
