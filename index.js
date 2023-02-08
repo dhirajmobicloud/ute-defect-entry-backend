@@ -3,6 +3,7 @@ const Connect = require('./DB/config');
 const mongoose = require('mongoose')
 const cors = require('cors')
 const Vehicle = require('./Models/Vehicle_Schema')
+const User = require('./Models/User_Schema')
 
 const surface_RH_139_defects = require('./Routes/Surface_RH_139/fetching_surface_rh_139_defects')
 const add_surface_RH_139_defect = require('./Routes/Surface_RH_139/AddNew_surface_rh_139_defect')
@@ -88,9 +89,19 @@ app.use('/addNew_Door_closing_142_defect', addNew_Door_closing_142_defect);
 app.use('/add_vehicle', add_vehicle);
 app.use('/all_vehicles', all_vehicles);
 
-app.put('/update/:id',(req, res)=>{
-    
+app.get('/users', async(req, res)=>{
+  let data = await User.find();
+  res.send(data)
 })
+
+app.get('/login', async(req, res)=>{
+  let password = req.body.password
+  let username = req.body.username
+  let data = await User.find({username:username, password:password});
+  res.send(data)
+})
+
+
 
 mongoose.set("strictQuery", true);
 // Connect()
