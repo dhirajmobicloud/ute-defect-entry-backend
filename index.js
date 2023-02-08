@@ -96,7 +96,10 @@ app.use('/all_vehicles', all_vehicles);
 
 app.get('/users', async (req , res)=>{
   let data = await User.find();
-  res.send({"username" : data.username})
+  let result = await data.map((element)=>{
+    return {"username" : element.username}
+  })
+  res.send(result)
  
 })
 
