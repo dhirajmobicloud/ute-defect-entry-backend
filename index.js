@@ -121,6 +121,11 @@ app.post('/assigned-segement', async(req,res)=>{
   res.send(result)
 })
 
+app.get('/assigned-segement-data', async(req,res)=>{
+  let data = await Demo.find();
+  res.send(data)
+})
+
 mongoose.set("strictQuery", true);
 // Connect()
 
