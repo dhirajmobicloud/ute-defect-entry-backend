@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const Vehicle = require('./Models/Vehicle_Schema')
 const User = require('./Models/User_Schema')
+const Demo = require('./Models/demoSchema')
 
 const surface_RH_139_defects = require('./Routes/Surface_RH_139/fetching_surface_rh_139_defects')
 const add_surface_RH_139_defect = require('./Routes/Surface_RH_139/AddNew_surface_rh_139_defect')
@@ -112,6 +113,12 @@ app.post('/login', async (req , res)=>{
  }else{
   res.status(401).send("please enter valid data")
  }
+})
+
+app.post('/assigned-segement', async(req,res)=>{
+  let data = await new Demo(req.body)
+  let result = await data.save();
+  res.send(result)
 })
 
 mongoose.set("strictQuery", true);
