@@ -56,40 +56,40 @@ app.get('/', (req , res)=>{
   res.send("Welcome")
 })
 
-app.use('/surface_RH_139_defects', surface_RH_139_defects);
+app.use('/surface-rh-139-defects', surface_RH_139_defects);
 app.use('/add_surface_RH_139_defect', add_surface_RH_139_defect);
 
-app.use('/surface_FTR_139_defects', surface_FTR_139_defects);
+app.use('/surface-ftr-139-defects', surface_FTR_139_defects);
 app.use('/add_surface_FTR_139_defect', add_surface_FTR_139_defect);
 
-app.use('/electrical_1_140_defects', electrical_1_140_defects);
+app.use('/electrical-1-140-defects', electrical_1_140_defects);
 app.use('/addNew_Electrical_1_140_defect', addNew_Electrical_1_140_defect);
 
-app.use('/bluetooth_139_defect', bluetooth_139_defect);
+app.use('/bluetooth-139-defect', bluetooth_139_defect);
 app.use('/addNew_Bluetooth_139_defect', addNew_Bluetooth_139_defect);
 
-app.use('/surface_LH_140_defect', surface_LH_140_defect);
+app.use('/surface-lh-140-defect', surface_LH_140_defect);
 app.use('/addNew_surface_LH_140_defect', addNew_surface_LH_140_defect);
 
-app.use('/rear_INT_140_defects', rear_INT_140_defects);
+app.use('/rear-int-140-defects', rear_INT_140_defects);
 app.use('/addNew_rear_INT_140_defect', addNew_rear_INT_140_defect);
 
-app.use('/rear_EXT_141_defects', rear_EXT_141_defects);
+app.use('/rear-ext-141-defects', rear_EXT_141_defects);
 app.use('/addNew_rear_EXT_141_defect', addNew_rear_EXT_141_defect);
 
-app.use('/rH_exterior_141_defects', rH_exterior_141_defects);
+app.use('/rh-exterior-141-defects', rH_exterior_141_defects);
 app.use('/addNew_RH_exterior_141_defect', addNew_RH_exterior_141_defect);
 
-app.use('/lH_Exterior_141_defects', lH_Exterior_141_defects);
+app.use('/lh-exterior-141-defects', lH_Exterior_141_defects);
 app.use('/addNew_LH_Exterior_141_defect', addNew_LH_Exterior_141_defect);
 
-app.use('/electrical_2_142_defects', electrical_2_142_defects);
+app.use('/electrical-2-142-defects', electrical_2_142_defects);
 app.use('/addNew_Electrical_2_142_defect', addNew_Electrical_2_142_defect);
 
-app.use('/front_EXT_142_defects', front_EXT_142_defects);
+app.use('/front-ext-142-defects', front_EXT_142_defects);
 app.use('/addNew_Front_EXT_142_defect', addNew_Front_EXT_142_defect);
 
-app.use('/door_closing_142_defects', door_closing_142_defects);
+app.use('/door-closing-142-defects', door_closing_142_defects);
 app.use('/addNew_Door_closing_142_defect', addNew_Door_closing_142_defect);
 
 app.use('/add_vehicle', add_vehicle);
