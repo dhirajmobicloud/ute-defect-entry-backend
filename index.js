@@ -126,6 +126,12 @@ app.get('/assigned-segement-data', async(req,res)=>{
   res.send(data)
 })
 
+app.get('/get-assigned-segement-data/:username', async(req,res)=>{
+  let username = req.params.username
+  let data = await Demo.find({username});
+  res.send(data)
+})
+
 mongoose.set("strictQuery", true);
 // Connect()
 
