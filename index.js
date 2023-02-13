@@ -104,6 +104,14 @@ app.get('/users', async (req , res)=>{
  
 })
 
+app.post('/addusers', async (req , res)=>{
+  let data =  new User(req.body)
+  let result = await data.save()
+  res.send(result)
+ 
+})
+
+
 app.post('/login', async (req , res)=>{
   let Username = req.body.username;
   let Password = req.body.password;
