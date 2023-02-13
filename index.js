@@ -139,7 +139,7 @@ app.get('/get-assigned-segement-data/:username', async(req,res)=>{
   let data = await Demo.find({username});
   // res.send(data[0])
   if(data){
-    res.status(401).send("Please enter valid data")
+    res.status(401).send({err:"Please enter valid data"})
   }
   else{
     res.send(data[0])
