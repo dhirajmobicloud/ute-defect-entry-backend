@@ -44,6 +44,7 @@ const addNew_Door_closing_142_defect = require('./Routes/Door Closing 142/AddNew
 
 const add_vehicle = require('./Routes/Vehicle/add_vehicle')
 const all_vehicles = require('./Routes/Vehicle/all_vehicles');
+const get_vehicle_data = require('./Routes/Vehicle/getVehicleData')
 const { json } = require('express');
 
 const app = express();
@@ -94,6 +95,13 @@ app.use('/addNew_Door_closing_142_defect', addNew_Door_closing_142_defect);
 
 app.use('/add_vehicle', add_vehicle);
 app.use('/all_vehicles', all_vehicles);
+app.get('/get-vehicle-data/:win_number', async(req,res)=>{
+  let win_number = req.params.win_number
+  let data = await Vehicle.findOne({win_number});
+  res.send(data)
+})
+// app.use('/get-vehicle-data/:win_number', get_vehicle_data);
+
 
 app.get('/users', async (req , res)=>{
   let data = await User.find();
