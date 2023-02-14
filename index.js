@@ -101,25 +101,52 @@ app.get("/get-vehicle-data/:win_number", async (req, res) => {
   res.send(data);
 });
 
-app.put("/update-vehicle-data/:win_number", async (req, res) => {
+app.put("/add-vehicle-defect/:win_number", async (req, res) => {
   console.log(req.body);
   let data = await Vehicle.findOne({ win_number: req.params.win_number });
-  data.defect.push(req.body)
-  res.send(data);
+  data.defect.push(req.body);
+  let result = await data.save();
+  res.send(result);
+});
+
+app.put("/repaired-vehicle-defect/:win_number", async (req, res) => {
+  console.log(req.body);
+  // let data = await Vehicle.findOne({ win_number: req.params.win_number });
+  //  data.defect.filter((element)=> element._id !== req.body._id )
+  // let result = await data.save()
+  let data = req.body;
+  let vehicalId = req.params.win_number;
+  Vehicle.findOne({ win_number: vehicalId }).then((vehicalData) => {
+    let Index = vehicalData.defect.findIndex(
+      (element) => element._id === data._id
+    );
+    vehicalData.defect.splice(Index, 1);
+    vehicalData.repaired = [...vehicalData.repaired, data];
+    Vehicle.updateOne(
+      { win_number: vehicalId },
+      { $set: { repaired: vehicalData.repaired, defect: vehicalData.defect } }
+    ).then((result) => {
+      if (result.acknowledged && result.modifiedCount > 0) {
+        res.send({
+          Message: "Success",
+        });
+      }
+    });
+  });
 });
 
 // app.use('/get-vehicle-data/:win_number', get_vehicle_data);
 
 app.get("/users", async (req, res) => {
   let data = await User.find();
-  let result = await data.map((element) => {
+  let result = data.map((element) => {
     return { username: element.username };
   });
   res.send(result);
 });
 
 app.get("/addusers", async (req, res) => {
-  let data = await new User(req.body);
+  let data = new User(req.body);
   let result = await data.save();
   res.send(result);
 });
