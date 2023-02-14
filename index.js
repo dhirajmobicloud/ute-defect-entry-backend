@@ -100,6 +100,18 @@ app.get('/get-vehicle-data/:win_number', async(req,res)=>{
   let data = await Vehicle.findOne({win_number});
   res.send(data)
 })
+
+app.put('/update-vehicle-data/:win_number', async(req,res)=>{
+  let data = await Vehicle.updateOne(
+    req.params,
+    {
+      $set: req.body
+
+    }
+  )
+  res.send(data);
+})
+
 // app.use('/get-vehicle-data/:win_number', get_vehicle_data);
 
 
