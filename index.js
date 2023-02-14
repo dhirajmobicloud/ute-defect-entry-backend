@@ -109,6 +109,27 @@ app.put("/add-vehicle-defect/:win_number", async (req, res) => {
   res.send(result);
 });
 
+app.put("/remove-vehicle-defect/:win_number", async (req, res) => {
+   let data = req.body
+  let vehicalId  = req.params.win_number;
+  Vehicle.findOne({win_number:vehicalId}).then((vehicalData)=>{
+    let Index = vehicalData.defect.findIndex(
+      (element) => element._id === data._id
+    );
+    vehicalData.defect.splice(Index, 1);
+    Vehicle.updateOne(
+      { win_number: vehicalId },
+      { $set: {  defect: vehicalData.defect } }
+    ).then((result) => {
+      if (result.acknowledged && result.modifiedCount > 0) {
+        res.send({
+          Message: "Success",
+        });
+      }
+    });
+  })
+});
+
 app.put("/repaired-vehicle-defect/:win_number", async (req, res) => {
   console.log(req.body);
   // let data = await Vehicle.findOne({ win_number: req.params.win_number });
