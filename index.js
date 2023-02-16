@@ -58,40 +58,40 @@ app.get("/", (req, res) => {
 });
 
 app.use("/surface-rh-139-defects", surface_RH_139_defects);
-app.use("/add_surface_RH_139_defect", add_surface_RH_139_defect);
+app.use("/add_surface-rh-139-defects", add_surface_RH_139_defect);
 
 app.use("/surface-ftr-139-defects", surface_FTR_139_defects);
-app.use("/add_surface_FTR_139_defect", add_surface_FTR_139_defect);
+app.use("/add_surface-ftr-139-defects", add_surface_FTR_139_defect);
 
 app.use("/electrical-1-140-defects", electrical_1_140_defects);
-app.use("/addNew_Electrical_1_140_defect", addNew_Electrical_1_140_defect);
+app.use("/add_electrical-1-140-defects", addNew_Electrical_1_140_defect);
 
 app.use("/bluetooth-139-defect", bluetooth_139_defect);
-app.use("/addNew_Bluetooth_139_defect", addNew_Bluetooth_139_defect);
+app.use("/add_bluetooth-139-defect", addNew_Bluetooth_139_defect);
 
 app.use("/surface-lh-140-defect", surface_LH_140_defect);
-app.use("/addNew_surface_LH_140_defect", addNew_surface_LH_140_defect);
+app.use("/add_surface-lh-140-defect", addNew_surface_LH_140_defect);
 
 app.use("/rear-int-140-defects", rear_INT_140_defects);
-app.use("/addNew_rear_INT_140_defect", addNew_rear_INT_140_defect);
+app.use("/add_rear-int-140-defects", addNew_rear_INT_140_defect);
 
 app.use("/rear-ext-141-defects", rear_EXT_141_defects);
-app.use("/addNew_rear_EXT_141_defect", addNew_rear_EXT_141_defect);
+app.use("/add_rear-ext-141-defects", addNew_rear_EXT_141_defect);
 
 app.use("/rh-exterior-141-defects", rH_exterior_141_defects);
-app.use("/addNew_RH_exterior_141_defect", addNew_RH_exterior_141_defect);
+app.use("/add_rh-exterior-141-defects", addNew_RH_exterior_141_defect);
 
 app.use("/lh-exterior-141-defects", lH_Exterior_141_defects);
-app.use("/addNew_LH_Exterior_141_defect", addNew_LH_Exterior_141_defect);
+app.use("/add_lh-exterior-141-defects", addNew_LH_Exterior_141_defect);
 
 app.use("/electrical-2-142-defects", electrical_2_142_defects);
-app.use("/addNew_Electrical_2_142_defect", addNew_Electrical_2_142_defect);
+app.use("/add_electrical-2-142-defects", addNew_Electrical_2_142_defect);
 
 app.use("/front-ext-142-defects", front_EXT_142_defects);
-app.use("/addNew_Front_EXT_142_defect", addNew_Front_EXT_142_defect);
+app.use("/add_front-ext-142-defects", addNew_Front_EXT_142_defect);
 
 app.use("/door-closing-142-defects", door_closing_142_defects);
-app.use("/addNew_Door_closing_142_defect", addNew_Door_closing_142_defect);
+app.use("/add_door-closing-142-defects", addNew_Door_closing_142_defect);
 
 app.use("/add_vehicle", add_vehicle);
 app.use("/all_vehicles", all_vehicles);
@@ -122,9 +122,12 @@ app.put("/remove-vehicle-defect/:win_number", async (req, res) => {
       { $set: {  defect: vehicalData.defect } }
     ).then((result) => {
       if (result.acknowledged && result.modifiedCount > 0) {
-        res.send({
-          Message: "Success",
-        });
+        Vehicle.findOne({win_number:vehicalId}).then((info)=>{
+          res.send({
+            info
+          });
+        })
+        
       }
     });
   })
@@ -191,6 +194,19 @@ app.post("/assigned-segement", async (req, res) => {
 
 app.get("/assigned-segement-data", async (req, res) => {
   let data = await Demo.find();
+  res.send(data);
+});
+
+app.put("/update-assigned-segement", async (req, res) => {
+  // let _id = req.body._id
+console.log(req.body)
+  let data = await Demo.updateOne(
+   {_id : req.body._id},
+    {
+      $set: req.body
+
+    }
+  )
   res.send(data);
 });
 

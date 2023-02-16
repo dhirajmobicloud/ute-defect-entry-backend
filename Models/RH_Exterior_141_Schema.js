@@ -16,7 +16,8 @@ const RH_Exterior_141_Schema = new mongoose.Schema({
         Station_No:String,
         Check_point:String,
         Barcode:String,
-        Segement: String
+        Segement: String,
+        new : Boolean
 })
 
 module.exports = mongoose.model('RH_Exterior_141', RH_Exterior_141_Schema);

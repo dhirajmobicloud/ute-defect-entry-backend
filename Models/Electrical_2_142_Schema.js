@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 
 const Electrical_2_142_Schema = new mongoose.Schema({
         Digit_13: String,
-        Surface_RH_139 : String,
         AA : String,
         BB : String,
         CC : String,
@@ -16,7 +15,8 @@ const Electrical_2_142_Schema = new mongoose.Schema({
         Station_No:String,
         Check_point:String,
         Barcode:String,
-        Segement: String
+        Segement: String,
+        new : Boolean
 })
 
 module.exports = mongoose.model('Electrical_2_142', Electrical_2_142_Schema);

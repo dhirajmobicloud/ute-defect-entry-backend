@@ -16,7 +16,8 @@ const Electrical_1_140_Schema = new mongoose.Schema({
         Station_No:String,
         Check_point:String,
         Barcode:String,
-        Segement: String
+        Segement: String,
+        new : Boolean
 })
 
 module.exports = mongoose.model('Electrical_1_140', Electrical_1_140_Schema);

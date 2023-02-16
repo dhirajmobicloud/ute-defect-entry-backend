@@ -16,7 +16,8 @@ const Door_Closing_142_Schema = new mongoose.Schema({
         Station_No:String,
         Check_point:String,
         Barcode:String,
-        Segement: String
+        Segement: String,
+        new : Boolean
 })
 
 module.exports = mongoose.model('Door_Closing_142', Door_Closing_142_Schema);

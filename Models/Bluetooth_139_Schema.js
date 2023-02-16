@@ -16,7 +16,8 @@ const Bluetooth_139_Schema = new mongoose.Schema({
         Station_No:String,
         Check_point:String,
         Barcode:String,
-        Segement: String
+        Segement: String,
+        new : Boolean
 })
 
 module.exports = mongoose.model('Bluetooth_139', Bluetooth_139_Schema);
