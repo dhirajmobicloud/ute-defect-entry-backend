@@ -97,13 +97,13 @@ app.use("/add_vehicle", add_vehicle);
 app.use("/all_vehicles", all_vehicles);
 app.get("/get-vehicle-data/:win_number", async (req, res) => {
   let win_number = req.params.win_number;
-  let data = await Vehicle.findOne({ win_number });
+  let data = await Vehicle.findOne({vin: win_number });
   res.send(data);
 });
 
-app.put("/add-vehicle-defect/:win_number", async (req, res) => {
+app.put("/add-vehicle-defect/:vin_number", async (req, res) => {
   console.log(req.body);
-  let data = await Vehicle.findOne({ win_number: req.params.win_number });
+  let data = await Vehicle.findOne({ vin_number: req.params.vin_number });
   data.defect.push(req.body);
   let result = await data.save();
   res.send(result);
