@@ -103,7 +103,7 @@ app.get("/get-vehicle-data/:win_number", async (req, res) => {
 
 app.put("/add-vehicle-defect/:vin_number", async (req, res) => {
   console.log(req.body);
-  let data = await Vehicle.findOne({ vin_number: req.params.vin_number });
+  let data = await Vehicle.findOne({ vin: req.params.vin_number });
   data.defect.push(req.body);
   let result = await data.save();
   res.send(result);
@@ -112,17 +112,17 @@ app.put("/add-vehicle-defect/:vin_number", async (req, res) => {
 app.put("/remove-vehicle-defect/:win_number", async (req, res) => {
    let data = req.body
   let vehicalId  = req.params.win_number;
-  Vehicle.findOne({win_number:vehicalId}).then((vehicalData)=>{
+  Vehicle.findOne({vin:vehicalId}).then((vehicalData)=>{
     let Index = vehicalData.defect.findIndex(
       (element) => element._id === data._id
     );
     vehicalData.defect.splice(Index, 1);
     Vehicle.updateOne(
-      { win_number: vehicalId },
+      { vin: vehicalId },
       { $set: {  defect: vehicalData.defect } }
     ).then((result) => {
       if (result.acknowledged && result.modifiedCount > 0) {
-        Vehicle.findOne({win_number:vehicalId}).then((info)=>{
+        Vehicle.findOne({vin:vehicalId}).then((info)=>{
           res.send({
             info
           });
@@ -140,20 +140,21 @@ app.put("/repaired-vehicle-defect/:win_number", async (req, res) => {
   // let result = await data.save()
   let data = req.body;
   let vehicalId = req.params.win_number;
-  Vehicle.findOne({ win_number: vehicalId }).then((vehicalData) => {
+  Vehicle.findOne({ vin: vehicalId }).then((vehicalData) => {
     let Index = vehicalData.defect.findIndex(
       (element) => element._id === data._id
     );
     vehicalData.defect.splice(Index, 1);
     vehicalData.repaired = [...vehicalData.repaired, data];
     Vehicle.updateOne(
-      { win_number: vehicalId },
+      { vin: vehicalId },
       { $set: { repaired: vehicalData.repaired, defect: vehicalData.defect } }
     ).then((result) => {
       if (result.acknowledged && result.modifiedCount > 0) {
-        res.send({
-          Message: "Success",
-        });
+        Vehicle.findOne({ vin: vehicalId }).then((vehicle)=>{
+          res.send(vehicle);
+        })
+        
       }
     });
   });
