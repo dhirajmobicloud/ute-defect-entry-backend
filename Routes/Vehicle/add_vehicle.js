@@ -6,9 +6,16 @@ const Vehicle = require('../../Models/Vehicle_Schema')
 
 router.post('/', async(req, res)=>{
     console.log(req.body)
-    let data =  new Vehicle(req.body);
-    let result = await data.save();
+    let vin = req.body.vin
+    let data = await Vehicle.findOne({vin:vin})
+    if(data){
+        res.status(400).send({err:"Vehicle already registerd"})
+    }else{
+        let newVehicle = new Vehicle(req.body)
+        let result = await newVehicle.save();
     res.send(result)
+    }
+    
 })
 
 
