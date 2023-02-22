@@ -5,6 +5,7 @@ const cors = require("cors");
 const Vehicle = require("./Models/Vehicle_Schema");
 const User = require("./Models/User_Schema");
 const Demo = require("./Models/demoSchema");
+const Surface_RH_139 = require("./Models/Surface_RH_139_Schema");
 
 const surface_RH_139_defects = require("./Routes/Surface_RH_139/fetching_surface_rh_139_defects");
 const add_surface_RH_139_defect = require("./Routes/Surface_RH_139/AddNew_surface_rh_139_defect");
@@ -44,6 +45,7 @@ const addNew_Door_closing_142_defect = require("./Routes/Door Closing 142/AddNew
 
 const add_vehicle = require("./Routes/Vehicle/add_vehicle");
 const all_vehicles = require("./Routes/Vehicle/all_vehicles");
+const replace_defects = require("./Routes/Vehicle/replace_defects")
 const get_vehicle_data = require("./Routes/Vehicle/getVehicleData");
 const { json } = require("express");
 
@@ -95,9 +97,10 @@ app.use("/add_door-closing-142-defects", addNew_Door_closing_142_defect);
 
 app.use("/add_vehicle", add_vehicle);
 app.use("/all_vehicles", all_vehicles);
+app.use('/replace-defects', replace_defects)
 app.get("/get-vehicle-data/:win_number", async (req, res) => {
   let win_number = req.params.win_number;
-  let data = await Vehicle.findOne({vin: win_number });
+  let data = await Vehicle.findOne({ vin: win_number });
   res.send(data);
 });
 
@@ -110,27 +113,26 @@ app.put("/add-vehicle-defect/:vin_number", async (req, res) => {
 });
 
 app.put("/remove-vehicle-defect/:win_number", async (req, res) => {
-   let data = req.body
-  let vehicalId  = req.params.win_number;
-  Vehicle.findOne({vin:vehicalId}).then((vehicalData)=>{
+  let data = req.body;
+  let vehicalId = req.params.win_number;
+  Vehicle.findOne({ vin: vehicalId }).then((vehicalData) => {
     let Index = vehicalData.defect.findIndex(
       (element) => element._id === data._id
     );
     vehicalData.defect.splice(Index, 1);
     Vehicle.updateOne(
       { vin: vehicalId },
-      { $set: {  defect: vehicalData.defect } }
+      { $set: { defect: vehicalData.defect } }
     ).then((result) => {
       if (result.acknowledged && result.modifiedCount > 0) {
-        Vehicle.findOne({vin:vehicalId}).then((info)=>{
+        Vehicle.findOne({ vin: vehicalId }).then((info) => {
           res.send({
-            info
+            info,
           });
-        })
-        
+        });
       }
     });
-  })
+  });
 });
 
 app.put("/repaired-vehicle-defect/:win_number", async (req, res) => {
@@ -151,10 +153,9 @@ app.put("/repaired-vehicle-defect/:win_number", async (req, res) => {
       { $set: { repaired: vehicalData.repaired, defect: vehicalData.defect } }
     ).then((result) => {
       if (result.acknowledged && result.modifiedCount > 0) {
-        Vehicle.findOne({ vin: vehicalId }).then((vehicle)=>{
+        Vehicle.findOne({ vin: vehicalId }).then((vehicle) => {
           res.send(vehicle);
-        })
-        
+        });
       }
     });
   });
@@ -200,22 +201,25 @@ app.get("/assigned-segement-data", async (req, res) => {
 
 app.put("/update-assigned-segement", async (req, res) => {
   // let _id = req.body._id
-console.log(req.body)
+  console.log(req.body);
   let data = await Demo.updateOne(
-   {_id : req.body._id},
+    { _id: req.body._id },
     {
-      $set: req.body
-
+      $set: req.body,
     }
-  )
+  );
   res.send(data);
 });
 
 app.get("/get-assigned-segement-data/:username", async (req, res) => {
   let username = req.params.username;
-  let data = await Demo.find({ username });
-  res.send(data[0]);
+  let data = await Demo.findOne({ username });
+  res.send(data);
 });
+
+// app.post("/replace-defects", async (req, res) => {
+ 
+// });
 
 mongoose.set("strictQuery", true);
 // Connect()
