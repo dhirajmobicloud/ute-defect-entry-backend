@@ -9,7 +9,7 @@ router.post('/', async(req, res)=>{
     let vin = req.body.vin
     let data = await Vehicle.findOne({vin:vin})
     if(data){
-        res.status(400).send({err:"Vehicle already registerd"})
+        res.send(data)
     }else{
         let newVehicle = new Vehicle(req.body)
         let result = await newVehicle.save();
