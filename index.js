@@ -171,7 +171,7 @@ app.get("/users", async (req, res) => {
   res.send(result);
 });
 
-app.get("/addusers", async (req, res) => {
+app.post("/addusers", async (req, res) => {
   let data = new User(req.body);
   let result = await data.save();
   res.send(result);
@@ -226,7 +226,7 @@ mongoose.set("strictQuery", true);
 
 Connect()
   .then(() => {
-    app.listen(5000);
+    app.listen(5500);
     console.log("Server running");
   })
   .catch((err) => {
